@@ -148,13 +148,13 @@ ref: https://github.com/aws/aws-cdk/pull/30823/files
 
 明確な分けたい理由に遭遇したら分けるのを考えるとかもあり。
 
-### parameter.tsのようなファイルにパラメータまとめると思いますが、設定したいシークレットがたくさんある場合はどうしてますか？
+## parameter.tsのようなファイルにパラメータまとめると思いますが、設定したいシークレットがたくさんある場合はどうしてますか？
 
 Secrets用Constructを作って、そこでまとめて管理しています。
 
 parameter.tsのようなファイルでは、それ用のinterfaceを切ったり。
 
-### aws_s3_notificationsでaspectがデフォルトで500になってるようなんですがaspectのタグの上書きってできるのでしょうか？
+## aws_s3_notificationsでaspectがデフォルトで500になってるようなんですがaspectのタグの上書きってできるのでしょうか？
 
 (「aws_s3_notificationsで」というのに対して回答として沿っているかわからないのですが)、Aspect/Tagsのメソッドとしてはpriorityの上書きはできます！
 
