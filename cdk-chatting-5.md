@@ -160,6 +160,8 @@ parameter.tsのようなファイルでは、それ用のinterfaceを切った�
 
 ※aws_s3_notifications内のファイルにtagが見つからなかったが、Aspectsのpriorityのデフォルト値は`AspectPriority.DEFAULT`(数値として500)
 
+※TagsのAspectsで[priorityが効かないバグ](https://github.com/aws/aws-cdk/pull/33460)があったが、今は直っている。
+
 ※Aspectsのpriorityについては[こちら](https://go-to-k.hatenablog.com/entry/cdk-new-aspects)
 
 ```ts
