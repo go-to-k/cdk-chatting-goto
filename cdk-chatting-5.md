@@ -96,8 +96,8 @@
 ## Construct ID に使用する単語はどのように決めていますか？ルール等を定めていたら知りたいです
 
 - 基本Construct名と同じ(そのユースケースの名前とかサービス名とか)
-  - Lambdaを使い回すためのLambda Constructみたいなときはユースケースの名前(ImageRegister、MovieRegister)
-  - XxxApiみたいなConstructであれば同じように「XxxApi」とかにする
+    - Lambdaを使い回すためのLambda Constructみたいなときはユースケースの名前(ImageRegister、MovieRegister)
+    - XxxApiみたいなConstructであれば同じように「XxxApi」とかにする
 - xxStack, xxConstructというsuffixはしない（論理IDが長くなる）
 - L2っぽい単一リソースのConstructを作る場合は、そのメインのリソースは”Resource”または”Default”にしたり(論理IDが短くなる)
 
@@ -110,7 +110,7 @@
 
 - Draw.ioでCDK関係ない感じで書いている。全然ここら辺のエコシステム知らない。
 - AWS Infrastructure Composer (以前は [Application Composer] と呼ばれていた) でCloudFormationテンプレートから図を出してくれるやつもあり？
-  - が、細かいリソース(IAMとか)は図に入れたくなかったりするので、手動で図を書いて抽象化もありかなと思っている（でもメンテしなくなるのだけ注意）
+    - が、細かいリソース(IAMとか)は図に入れたくなかったりするので、手動で図を書いて抽象化もありかなと思っている（でもメンテしなくなるのだけ注意）
 - Amazon Q CLI気になる
 
 ## 環境変数など値のバリデーションはスタックで行いますか？アプリで行いますか？ 自分はアプリ側でバリエーションライブラリを入れていますが、CDKのテストの記事などスタック側で設定してる例をたまに見るので何か明確な理由があれば知りたいです
@@ -147,4 +147,3 @@ ref: https://github.com/aws/aws-cdk/pull/30823/files
 アプリ・インフラでチームが違うとかリポジトリが分かれているとかでない限り、無理にわけなくてもいいかも？
 
 明確な分けたい理由に遭遇したら分けるのを考えるとかもあり。
-
