@@ -158,6 +158,10 @@ parameter.tsのようなファイルでは、それ用のinterfaceを切った�
 
 (「aws_s3_notificationsで」というのに対して回答として沿っているかわからないのですが)、Aspect/Tagsのメソッドとしてはpriorityの上書きはできます！
 
+※aws_s3_notifications内のファイルにtagが見つからなかった
+
+※Aspectsのpriorityについては[こちら](https://go-to-k.hatenablog.com/entry/cdk-new-aspects)
+
 ```ts
 export class Aspects {
   // ...
