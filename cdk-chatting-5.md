@@ -18,13 +18,13 @@
     - Construct + ループで同じリソースの複製とか再利用も簡単
 3. バリデーションによる安全性
     - CFnデプロイが走る前に組み込みのバリデーション走ってエラーにしてくれる
+    - デプロイ済みのリソースに触れない、ロールバック失敗とかもない
 4. AWSサポートに頼れる、日本のCDKコミュニティ層も厚い
-    - リソースに触れない、ロールバック失敗とかもない
 
 ### 「宣言的がいい・抽象化したくない」
 
 - CDKも宣言的。「手続的にも書ける」ってだけ。
-- 抽象化したくない=L2+エスケープハッチやL1 Constructで、最低限の型・入力補完・バリデーション入れたりなCDKの恩恵に預かれる
+- 抽象化したくない=L2+エスケープハッチやL1 Constructで、最低限の型・入力補完・バリデーション入れたりなどCDKの恩恵に預かれる
 - →これで否定するのももったいない
 
 ### CDKのデメリットもある（便利な反面仕方ない、トレードオフ）
@@ -147,3 +147,66 @@ ref: https://github.com/aws/aws-cdk/pull/30823/files
 アプリ・インフラでチームが違うとかリポジトリが分かれているとかでない限り、無理にわけなくてもいいかも？
 
 明確な分けたい理由に遭遇したら分けるのを考えるとかもあり。
+
+### parameter.tsのようなファイルにパラメータまとめると思いますが、設定したいシークレットがたくさんある場合はどうしてますか？
+
+Secrets用Constructを作って、そこでまとめて管理しています。
+
+parameter.tsのようなファイルでは、それ用のinterfaceを切ったり。
+
+### aws_s3_notificationsでaspectがデフォルトで500になってるようなんですがaspectのタグの上書きってできるのでしょうか？
+
+(「aws_s3_notificationsで」というのに対して回答として沿っているかわからないのですが)、Aspect/Tagsのメソッドとしてはpriorityの上書きはできます！
+
+```ts
+export class Aspects {
+  // ...
+  // ...
+  public add(aspect: IAspect, options?: AspectOptions)
+}
+
+/**
+ * Options when Applying an Aspect.
+ */
+export interface AspectOptions {
+  /**
+   * The priority value to apply on an Aspect.
+   * Priority must be a non-negative integer.
+   *
+   * Aspects that have same priority value are not guaranteed to be
+   * executed in a consistent order.
+   *
+   * @default AspectPriority.DEFAULT
+   */
+  readonly priority?: number;
+}
+```
+
+```ts
+/**
+ * Properties for a tag
+ */
+export interface TagProps {
+  // ...
+  // ...
+  /**
+   * Priority of the tag operation
+   *
+   * Higher or equal priority tags will take precedence.
+   *
+   * Setting priority will enable the user to control tags when they need to not
+   * follow the default precedence pattern of last applied and closest to the
+   * construct in the tree.
+   *
+   * @default
+   *
+   * Default priorities:
+   *
+   * - 100 for `SetTag`
+   * - 200 for `RemoveTag`
+   * - 50 for tags added directly to CloudFormation resources
+   *
+   */
+  readonly priority?: number;
+}
+```
