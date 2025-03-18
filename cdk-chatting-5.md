@@ -156,11 +156,33 @@ parameter.tsのようなファイルでは、それ用のinterfaceを切った�
 
 ## aws_s3_notificationsでaspectがデフォルトで500になってるようなんですがaspectのタグの上書きってできるのでしょうか？
 
-(「aws_s3_notificationsで」というのに対して回答として沿っているかわからないのですが)、Aspect/Tagsのメソッドとしてはpriorityの上書きはできます！
+(「aws_s3_notificationsで」というのに対して回答として沿っているかわからないのですが)、Aspect/Tagsのメソッドとしてはpriorityの上書きはできます！数値の高い値を指定すると、より後から実行されます。
 
-※aws_s3_notifications内のファイルにtagが見つからなかった
+※aws_s3_notifications内のファイルにtagが見つからなかったが、Aspectsのpriorityのデフォルト値は`AspectPriority.DEFAULT`(数値として500)
 
 ※Aspectsのpriorityについては[こちら](https://go-to-k.hatenablog.com/entry/cdk-new-aspects)
+
+```ts
+/**
+ * Default Priority values for Aspects.
+ */
+export class AspectPriority {
+  /**
+   * Suggested priority for Aspects that mutate the construct tree.
+   */
+  static readonly MUTATING: number = 200;
+
+  /**
+   * Suggested priority for Aspects that only read the construct tree.
+   */
+  static readonly READONLY: number = 1000;
+
+  /**
+   * Default priority for Aspects that are applied without a priority.
+   */
+  static readonly DEFAULT: number = 500;
+}
+```
 
 ```ts
 export class Aspects {
