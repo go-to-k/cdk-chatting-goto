@@ -239,6 +239,12 @@ export interface TagProps {
 }
 ```
 
+### 2025/04/04追記
+
+これか！？
+
+[fix: customer aspect cannot add Tags if a BucketNotifications construct is present](https://github.com/aws/aws-cdk/pull/33979)
+
 ## CDKを使うPJでは、インフラのパラメータシートは作成しない（必要がない）ですよね？パラメータシートが必要な文化・お客様だと、CDK（IaC）がマッチしにくい印象です。資料とコードの二重管理という点もですが、CDKがいい感じに設定してくれた設定値をわざわざ確認して資料に落とし込む…？
 
 > インフラのパラメータシートは作成しない（必要がない）ですよね？
