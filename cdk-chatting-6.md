@@ -137,9 +137,36 @@ export class MyStage extends Stage {
 
 これが起きないようにするためには、そもそもそのような機能を使って自前で(物理名などの)文字列を生成しない、もしくは CDK 内部の論理名生成ロジックと同じようにステージを含めないでパスから計算するロジックを書く、などになるかなと。
 
-### CDK の Stage を活用しなくて困った事
+また他には、`cdk deploy`コマンドでのデプロイ対象のスタック指定の仕方でハマりそうなところもあります。（ただしこれは一時的なものなので、特にデメリットでもないかなと。）
 
-### CDK の Stage を活用して良かった事
+```sh
+# 1 スタックしかなくても以下のエラーに
+❯ cdk deploy
+Since this app includes more than a single stack, specify which stacks to use (wildcards are supported) or specify `--all`
+Stacks: MyStage/SampleStack
+
+# --all を指定しろと言われたが・・・
+❯ cdk deploy --all
+No stack found in the main cloud assembly. Use "list" to print manifest
+
+# ステージ指定だけでもダメ
+❯ cdk deploy MyStage
+No stacks match the name(s) MyStage
+
+# 後ろにただワイルドカードをつけるだけでもダメ
+❯ cdk deploy MyStage*
+No stacks match the name(s) MyStage*
+
+# 成功!!
+❯ cdk deploy MyStage/*
+
+# 成功!!
+❯ cdk deploy MyStage/SampleStack
+```
+
+### CDK の Stage を活用しなくて困った事(活用して良かった事)
+
+こちらは最初の方にあげた、 **「マルチスタック構成を環境ごとに、かつ静的に作りたい(呼びたい)場合」** かなと。
 
 ### 静的と動的はどちらがいい？
 
